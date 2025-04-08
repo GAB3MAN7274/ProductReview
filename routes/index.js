@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const ProductController = require('../controllers/ProductController.js')
+const productController = require('../controllers/ProductController.js')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.get('/products/profile/:id', ProductController.renderProfile);
+router.get('/products/profile/:id', productController.renderProfile);
+router.get('.products/edit/:id', productController.renderEditForm);
 module.exports = router;
