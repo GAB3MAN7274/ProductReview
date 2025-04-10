@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'product',
+    modelName: 'Product',
     timestamps: false,
     tableName: 'products'
   });
