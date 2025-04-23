@@ -27,3 +27,8 @@ module.exports.updateProduct = async function(req, res){
     });
     res.render(`/products/profile/${req.params.id}`);
 }
+
+module.exports.viewProducts = async function(req, res){
+    const products = await Product.findAll();
+    res.render('index', {products});
+}
