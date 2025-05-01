@@ -1,9 +1,11 @@
 const {Product} = require('../models')
-const categories = ['appliances', 'pets', 'home goods', 'other'];
+const categories = ['Appliances', 'Pets', 'Home Goods', 'Home Furniture', 'Hardware Tools', 'other'];
 
 module.exports.renderProfile = async function(req, res){
     const product = await Product.findByPk(
-        req.params.id
+        req.params.id, {
+            include:'reviews'
+        }
     );
     res.render('products/profile', {product});
 }
@@ -25,7 +27,7 @@ module.exports.updateProduct = async function(req, res){
             id: req.params.id,
         }
     });
-    res.render(`/products/profile/${req.params.id}`);
+    res.redirect(`/products/profile/${req.params.id}`);
 }
 
 module.exports.viewProducts = async function(req, res){
@@ -49,4 +51,13 @@ module.exports.addProduct = async function(req, res){
         description: req.body.description
     });
     res.redirect(`/products/profile/${result.id}`)
+}
+
+module.exports.deleteProduct = async function(req, res){
+    await Product.destroy({
+        where:{
+            id: req.params.id
+        }
+    });
+    res.redirect('/products')
 }
