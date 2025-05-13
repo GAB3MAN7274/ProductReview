@@ -20,7 +20,22 @@ module.exports = (sequelize, DataTypes) => {
   Product.init({
     product_name: DataTypes.STRING,
     category: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    rating: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        let reviews = this.reviews || [];
+        const reviewCount = reviews.length;
+        if (!reviewCount) {
+          return 0;
+        }
+        let total = 0
+        for (let i=0; i<reviewCount; i++) {
+          total+= this.reviews[i].rating;
+        }
+        return (total/reviewCount).toFixed(2);
+      }
+    }
   }, {
     sequelize,
     modelName: 'Product',
