@@ -1,5 +1,5 @@
 const {Product} = require('../models')
-const categories = ['Appliances', 'Pets', 'Home Goods', 'Home Furniture', 'Hardware Tools', 'other'];
+const categories = ['Appliances', 'Pets', 'Home Goods', 'Home Furniture', 'Hardware Tools', 'Technology', 'Other'];
 
 module.exports.renderProfile = async function(req, res){
     const product = await Product.findByPk(
